@@ -5,13 +5,12 @@ import {
   } from 'class-validator';
   
   // create-user-dto
-  export class CreateSystemDto {
+  export class CreateDesignationDto {
     @IsString()
-    @IsNotEmpty()
-    SystemName: string;
+    DesignationName: string;
   
     @IsString()
-    @IsNotEmpty()
-    SystemURL: string;
+    Department: string;
   
   }
+

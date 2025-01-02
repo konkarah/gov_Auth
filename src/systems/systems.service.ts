@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateSystemDto } from './dto/create-system.dto';
 import { UpdateSystemDto } from './dto/update-system.dto';
-import { System as SystemsEntity } from './entities/system.entity';
+import { Systems as SystemsEntity } from '../entities/system.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -19,16 +19,22 @@ export class SystemsService {
       await this.systemsRepository.create(
         createSystemDto,
       );
-      console.log(userData)
     return this.systemsRepository.save(userData);
   }
 
-  findAll() {
-    return `This action returns all systems`;
+  async findAll(): Promise<SystemsEntity[]> {
+    return this.systemsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} system`;
+  async findOne(id: string): Promise<SystemsEntity> {
+    const systemData = await this.systemsRepository.findOneBy({id})
+    if(!systemData){
+      throw new HttpException(
+        'User Not Found',
+        404,
+      );
+    }
+    return systemData;
   }
 
   update(id: number, updateSystemDto: UpdateSystemDto) {

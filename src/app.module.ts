@@ -10,6 +10,8 @@ import {
   ConfigService,
 } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { RolesModule } from './roles/roles.module';
+import { DesignationsModule } from './designations/designations.module';
 import typeorm from './config/typeorm';
 
 @Module({
@@ -25,7 +27,9 @@ import typeorm from './config/typeorm';
     }),
     UserModule,
     AuthModule,
-    SystemsModule
+    SystemsModule,
+    RolesModule,
+    DesignationsModule
 
   ],
   controllers: [AppController],

@@ -19,7 +19,7 @@ export class SystemsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.systemsService.findOne(+id);
+    return this.systemsService.findOne(id);
   }
 
   @Patch(':id')
